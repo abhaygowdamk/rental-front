@@ -57,11 +57,12 @@ const SignupPage = () => {
           username: formData.username,
           email: formData.email,
           password: formData.password,
-          confirmPassword: formData.confirmPassword
+          confirmPassword: formData.confirmPassword,
         }),
       });
 
       const text = await res.text();
+
       let data = {};
       try {
         data = text ? JSON.parse(text) : {};
@@ -71,6 +72,7 @@ const SignupPage = () => {
 
       if (!res.ok) {
         setError(data.message || data.error || "Signup failed. Please try again.");
+        setLoading(false);
         return;
       }
 
@@ -81,10 +83,9 @@ const SignupPage = () => {
 
       navigate("/login", {
         state: {
-          message: "Account created successfully! Please login to continue."
-        }
+          message: "Account created successfully! Please login to continue.",
+        },
       });
-
     } catch (error) {
       console.error("Network error:", error);
       setError(error.message || "Network error. Please try again.");
@@ -180,6 +181,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-
-
 
