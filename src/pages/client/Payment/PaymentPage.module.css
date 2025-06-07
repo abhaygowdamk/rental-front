@@ -1,0 +1,256 @@
+.paymentPage {
+  min-height: 100vh;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 3rem auto 0 auto;
+  width: 100%;
+}
+
+.summaryBox {
+  flex: 1;
+  min-width: 350px;
+  max-width: 480px;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.summaryBox h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.summaryCard {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2rem 2rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.summaryCard h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.summaryRowTotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: #222;
+  font-size: 1.1rem;
+  background: #f5f8fa;
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  margin-top: 0.7rem;
+}
+
+.totalPrice {
+  color: #2563eb;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.summaryValue {
+  color: #555;
+  font-weight: 500;
+}
+
+.backLink {
+  color: #2563eb;
+  font-size: 1rem;
+  margin-top: 1.2rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #1a47b8;
+  text-decoration: underline;
+}
+
+.paymentForm {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2rem 2rem 1.5rem 2rem;
+  min-width: 350px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.paymentForm h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup label {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.formGroup input {
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fafbfc;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #4070f4;
+}
+
+.cardIcons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.row {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.row .formGroup {
+  flex: 1;
+}
+
+.cvvInfo {
+  font-size: 1em;
+  color: #aaa;
+  margin-left: 0.3em;
+  cursor: pointer;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.7rem 0 1.2rem 0;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4070f4;
+}
+
+.payBtn {
+  width: 100%;
+  background: #5a4ff3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.payBtn:hover {
+  background: #3d36b2;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.secureInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #888;
+  font-size: 1rem;
+  margin-top: 0.7rem;
+}
+
+.lockIcon {
+  font-size: 1.2em;
+}
+
+.paymentLogos {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+  align-items: center;
+}
+
+.paymentLogos img {
+  height: 32px;
+}
+
+.footer {
+  text-align: center;
+  color: #aaa;
+  font-size: 1rem;
+  padding: 2rem 0 1rem 0;
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  .summaryBox,
+  .paymentForm {
+    min-width: unset;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.2rem;
+  }
+  .summaryCard,
+  .paymentForm {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+}

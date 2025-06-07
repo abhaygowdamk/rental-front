@@ -1,0 +1,96 @@
+/* Modern Card Layout */
+.formWrapper {
+  max-width: 440px;
+  margin: 48px auto;
+  padding: 36px 32px 28px 32px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e9f0ff 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px 0 rgba(0, 68, 255, 0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+}
+.formWrapper:hover {
+  box-shadow: 0 12px 40px 0 rgba(0, 68, 255, 0.15), 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.addressForm {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.addressForm label {
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+
+.addressForm select,
+.addressForm input[type="date"],
+.addressForm input[type="time"] {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #b6c5e0;
+  font-size: 1.05rem;
+  margin-top: 6px;
+  background: #f5f7fa;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.addressForm select:focus,
+.addressForm input[type="date"]:focus,
+.addressForm input[type="time"]:focus {
+  border: 1.5px solid #0066ff;
+  outline: none;
+  box-shadow: 0 0 0 2px #e3edff;
+}
+
+.rentBtn {
+  margin-top: 22px;
+  padding: 13px 0;
+  background: linear-gradient(90deg, #0066ff 0%, #3f51b5 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 rgba(0,102,255,0.08);
+  transition: background 0.18s, transform 0.14s;
+}
+.rentBtn:hover {
+  background: linear-gradient(90deg, #004bb5 0%, #283593 100%);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.error {
+  color: #e53935;
+  font-size: 1.01rem;
+  margin-bottom: 8px;
+  text-align: center;
+  background: #ffeaea;
+  border-radius: 5px;
+  padding: 7px 0 5px 0;
+}
+
+h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 26px;
+  font-size: 1.65rem;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+
+@media (max-width: 540px) {
+  .formWrapper {
+    padding: 18px 6vw 18px 6vw;
+    max-width: 97vw;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .rentBtn {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+}

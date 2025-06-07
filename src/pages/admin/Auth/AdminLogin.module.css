@@ -1,0 +1,117 @@
+.adminLoginPage {
+  min-height: 100vh;
+  background: #fafbfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerBox {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  min-width: 340px;
+  max-width: 360px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconBox {
+  margin-bottom: 1.2rem;
+}
+
+.adminIcon {
+  display: inline-block;
+  font-size: 2.2rem;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+}
+
+.heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.inputGroup label {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background: #fafbfc;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.2rem 0.7rem;
+}
+
+.inputIcon {
+  color: #888;
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.inputWrapper input {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #333;
+  padding: 0.8rem 0;
+  width: 100%;
+  outline: none;
+}
+
+.loginBtn {
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.loginBtn:hover {
+  background: #1a47b8;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .centerBox {
+    min-width: unset;
+    max-width: 100%;
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+}

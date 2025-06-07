@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Car-rental-1.git/static/css/main.3731ff3f.css",
+    "main.js": "/Car-rental-1.git/static/js/main.203c2523.js",
+    "index.html": "/Car-rental-1.git/index.html",
+    "main.3731ff3f.css.map": "/Car-rental-1.git/static/css/main.3731ff3f.css.map",
+    "main.203c2523.js.map": "/Car-rental-1.git/static/js/main.203c2523.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3731ff3f.css",
+    "static/js/main.203c2523.js"
+  ]
+}

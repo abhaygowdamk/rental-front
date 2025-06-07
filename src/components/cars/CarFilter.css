@@ -1,0 +1,63 @@
+.ds-car-filter {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  margin: -3.5rem auto 2.5rem auto;
+  max-width: 1100px;
+  position: relative;
+  z-index: 2;
+}
+.ds-car-filter__row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.ds-car-filter__field {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+.ds-car-filter__field label {
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.ds-car-filter__field input {
+  padding: 0.7rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.ds-car-filter__field input:focus {
+  border: 1.5px solid #2563eb;
+}
+.ds-car-filter__search {
+  margin-top: 1.2rem;
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ds-car-filter__search:hover {
+  background: #1741a6;
+}
+@media (max-width: 900px) {
+  .ds-car-filter {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+  .ds-car-filter__row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

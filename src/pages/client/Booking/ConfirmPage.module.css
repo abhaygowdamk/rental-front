@@ -1,0 +1,253 @@
+/* Enhanced ConfirmPage.module.css - Premium, modern, visually appealing layout */
+
+.container {
+  display: flex;
+  gap: 2.5rem;
+  padding: 2.5rem 2rem;
+  max-width: 1250px;
+  margin: 2.5rem auto;
+  background: #f6f8fa;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(60,80,180,0.08), 0 1.5px 4px rgba(0,0,0,0.03);
+}
+
+.leftSection {
+  flex: 1;
+  padding: 2.5rem 2rem 2.5rem 2.5rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(60,80,180,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.leftSection h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem 2rem;
+}
+
+.form label {
+  font-weight: 600;
+  color: #3b3b3b;
+  margin-bottom: 0.25rem;
+  font-size: 1.02rem;
+  grid-column: 1 / 2;
+}
+
+.form input[readonly] {
+  background: #f2f5fa;
+  border: 1.5px solid #e2e6f0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+  outline: none;
+  grid-column: 2 / 3;
+}
+
+.checkboxRow {
+  grid-column: 1 / 3;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 1.2rem 0 0.2rem 0;
+}
+
+.checkboxRow input[type="checkbox"] {
+  accent-color: #6c7cfb;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.checkboxRow label {
+  font-weight: 500;
+  color: #444;
+  font-size: 1.05rem;
+}
+
+.proceedBtn {
+  grid-column: 1 / 3;
+  background: linear-gradient(90deg, #6c7cfb 60%, #4070f4 100%);
+  color: #fff;
+  border: none;
+  padding: 1rem 0;
+  border-radius: 8px;
+  font-size: 1.18rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(60,80,180,0.08);
+  letter-spacing: 0.5px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.proceedBtn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #4070f4 60%, #6c7cfb 100%);
+  box-shadow: 0 4px 16px rgba(60,80,180,0.11);
+}
+
+.proceedBtn:disabled {
+  background: #b4b4b4;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.proceedBtn:disabled .spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s ease-in-out infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorMessage {
+  color: #d32f2f;
+  background-color: #fde7e7;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 0.95rem;
+  border-left: 4px solid #d32f2f;
+}
+
+.rightSection {
+  flex: 0 0 380px;
+  padding: 2.5rem 1.2rem;
+  background: linear-gradient(120deg, #eaf0ff 60%, #f4f6fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(60,80,180,0.07);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.carCard {
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 2px 12px rgba(60,80,180,0.09);
+  overflow: hidden;
+  width: 100%;
+  max-width: 330px;
+  transition: box-shadow 0.2s;
+}
+
+.carCard:hover {
+  box-shadow: 0 6px 24px rgba(60,80,180,0.14);
+}
+
+.carImage {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 13px 13px 0 0;
+  background: #e3e7ee;
+}
+
+.carInfo {
+  padding: 1.25rem 1.1rem 1.1rem 1.1rem;
+}
+
+.carInfo h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+.carInfo p {
+  color: #4070f4;
+  font-weight: 600;
+  margin: 0 0 0.7rem 0;
+  font-size: 1.08rem;
+}
+
+.carDetailsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 1.1rem;
+}
+
+.totalAmountBox {
+  background: #f5f7ff;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  margin-top: 1.2rem;
+  text-align: center;
+  box-shadow: 0 1.5px 4px rgba(60,80,180,0.06);
+}
+
+.totalAmount {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #2d2d2d;
+  margin: 0.6rem 0 0.2rem 0;
+  letter-spacing: 0.5px;
+}
+
+.amountNote {
+  color: #888;
+  font-size: 1.01rem;
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 3.5rem;
+  font-size: 1.15rem;
+  color: #4070f4;
+}
+
+@media (max-width: 1100px) {
+  .container {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.2rem;
+  }
+  .rightSection {
+    padding: 1.2rem 0.7rem;
+    max-width: 100%;
+  }
+  .leftSection {
+    padding: 1.2rem 1rem 1.2rem 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0.5rem;
+  }
+  .rightSection {
+    padding: 0.5rem 0.2rem;
+    max-width: 100%;
+  }
+  .leftSection {
+    padding: 0.7rem 0.5rem 0.7rem 0.7rem;
+  }
+  .form {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+}
