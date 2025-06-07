@@ -2,93 +2,100 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000"; // fallback for local dev
 
 const SignupPage = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Handle input change and reset error on input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
     if (error) setError("");
   };
 
+  // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
+    // Basic validations
     if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
       setError("Please fill in all fields");
-      setLoading(false);
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError("Please enter a valid email address");
-      setLoading(false);
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
-      setLoading(false);
       return;
     }
 
+    setLoading(true);
+
     try {
-      const res = await fetch(`${baseURL}/api/auth/signup`, {
+      const response = await fetch(`${baseURL}/api/auth/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // include credentials if your backend requires cookies/auth headers
+        credentials: "include",
         body: JSON.stringify({
           username: formData.username,
           email: formData.email,
           password: formData.password,
-          confirmPassword: formData.confirmPassword,
+          // Usually confirmPassword not sent to backend, remove if backend doesn't expect it
+          // confirmPassword: formData.confirmPassword,
         }),
       });
 
-      const text = await res.text();
-
+      const text = await response.text();
       let data = {};
       try {
         data = text ? JSON.parse(text) : {};
-      } catch (jsonError) {
-        console.error("Failed to parse JSON response:", jsonError);
+      } catch (parseError) {
+        console.error("Error parsing JSON:", parseError);
       }
 
-      if (!res.ok) {
+      if (!response.ok) {
         setError(data.message || data.error || "Signup failed. Please try again.");
         setLoading(false);
         return;
       }
 
+      // Save token and userId if returned
       if (data.token && data.userId) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
       }
 
+      // Redirect to login with success message
       navigate("/login", {
-        state: {
-          message: "Account created successfully! Please login to continue.",
-        },
+        state: { message: "Account created successfully! Please login to continue." },
       });
-    } catch (error) {
-      console.error("Network error:", error);
-      setError(error.message || "Network error. Please try again.");
+    } catch (networkError) {
+      console.error("Network error:", networkError);
+      setError(networkError.message || "Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -112,6 +119,7 @@ const SignupPage = () => {
                 placeholder="Choose a username"
                 value={formData.username}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -127,6 +135,7 @@ const SignupPage = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -142,6 +151,8 @@ const SignupPage = () => {
                 placeholder="Create a password"
                 value={formData.password}
                 onChange={handleChange}
+                required
+                minLength={6} // optional
               />
             </div>
           </div>
@@ -157,17 +168,15 @@ const SignupPage = () => {
                 placeholder="Confirm your password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                required
+                minLength={6} // optional
               />
             </div>
           </div>
 
           {error && <div className={styles.error}>{error}</div>}
 
-          <button
-            type="submit"
-            className={styles.createButton}
-            disabled={loading}
-          >
+          <button type="submit" className={styles.createButton} disabled={loading}>
             {loading ? "Creating..." : "Create Account"}
           </button>
 
@@ -181,4 +190,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-
