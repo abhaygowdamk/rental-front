@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
+
 const baseURL = process.env.REACT_APP_API_URL;
+
 const SignupPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -19,89 +21,76 @@ const SignupPage = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     if (error) setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submission started'); // Debug log
     setLoading(true);
-    setError(""); // Reset error state at the start
+    setError("");
 
-    console.log('Form data:', formData); // Debug log
-
-    // Basic validation
-    if (
-      !formData.username ||
-      !formData.email ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      console.log('Validation failed: Missing fields'); // Debug log
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
       setError("Please fill in all fields");
       setLoading(false);
       return;
     }
 
-    console.log('Validation passed'); // Debug log
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      console.log('Validation failed: Invalid email'); // Debug log
       setError("Please enter a valid email address");
       setLoading(false);
       return;
     }
 
-    // Password match validation
     if (formData.password !== formData.confirmPassword) {
-      console.log('Validation failed: Passwords do not match'); // Debug log
       setError("Passwords do not match");
       setLoading(false);
       return;
     }
 
-    console.log('All validations passed, submitting form'); // Debug log
     try {
+      const res = await fetch(`${baseURL}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword
+        }),
+      });
+
+      const text = await res.text();
+      let data = {};
       try {
-  const res = await fetch(`${baseURL}/api/auth/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: 'include',
-    body: JSON.stringify({
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-    }),
-  });
+        data = text ? JSON.parse(text) : {};
+      } catch (jsonError) {
+        console.error("Failed to parse JSON response:", jsonError);
+      }
 
-  const text = await res.text();
-  const data = text ? JSON.parse(text) : {}; // 🔐 safe parsing
+      if (!res.ok) {
+        setError(data.message || data.error || "Signup failed. Please try again.");
+        return;
+      }
 
-  if (!res.ok) {
-    console.error('Signup error response:', data);
-    setError(data.message || data.error || "Signup failed. Please try again.");
-    setLoading(false);
-    return;
-  }
+      if (data.token && data.userId) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.userId);
+      }
 
-  localStorage.setItem('token', data.token);
-  localStorage.setItem('userId', data.userId);
+      navigate("/login", {
+        state: {
+          message: "Account created successfully! Please login to continue."
+        }
+      });
 
-  navigate("/login", {
-    state: {
-      message: "Account created successfully! Please login to continue."
+    } catch (error) {
+      console.error("Network error:", error);
+      setError(error.message || "Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  });
-} catch (error) {
-  setError(error.message || "Network error. Please try again.");
-} finally {
-  setLoading(false);
-}
-
   };
 
   return (
@@ -191,3 +180,6 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+
+
