@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 
-const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000"; // fallback for local dev
+// Fallback to localhost if env is missing
+const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const SignupPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle input change and reset error on input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -28,24 +28,25 @@ const SignupPage = () => {
     if (error) setError("");
   };
 
-  // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     // Basic validations
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+    const { username, email, password, confirmPassword } = formData;
+
+    if (!username || !email || !password || !confirmPassword) {
       setError("Please fill in all fields");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
@@ -58,23 +59,16 @@ const SignupPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // include credentials if your backend requires cookies/auth headers
         credentials: "include",
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-          // Usually confirmPassword not sent to backend, remove if backend doesn't expect it
-          // confirmPassword: formData.confirmPassword,
-        }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       const text = await response.text();
       let data = {};
       try {
         data = text ? JSON.parse(text) : {};
-      } catch (parseError) {
-        console.error("Error parsing JSON:", parseError);
+      } catch (err) {
+        console.error("JSON Parse Error:", err);
       }
 
       if (!response.ok) {
@@ -83,19 +77,20 @@ const SignupPage = () => {
         return;
       }
 
-      // Save token and userId if returned
+      // Save token/user info if returned
       if (data.token && data.userId) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
       }
 
-      // Redirect to login with success message
       navigate("/login", {
-        state: { message: "Account created successfully! Please login to continue." },
+        state: {
+          message: "Account created successfully! Please login to continue.",
+        },
       });
-    } catch (networkError) {
-      console.error("Network error:", networkError);
-      setError(networkError.message || "Network error. Please try again.");
+    } catch (err) {
+      console.error("Signup Error:", err);
+      setError(err.message || "Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -152,7 +147,7 @@ const SignupPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                minLength={6} // optional
+                minLength={6}
               />
             </div>
           </div>
@@ -169,7 +164,7 @@ const SignupPage = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                minLength={6} // optional
+                minLength={6}
               />
             </div>
           </div>
