@@ -66,46 +66,42 @@ const SignupPage = () => {
     console.log('All validations passed, submitting form'); // Debug log
     try {
       try {
-const res = await fetch(`${baseURL}/api/auth/signup`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  credentials: 'include',
-  body: JSON.stringify({
-    username: formData.username,
-    email: formData.email,
-    password: formData.password,
-    confirmPassword: formData.confirmPassword
-  }),
-});
+  const res = await fetch(`${baseURL}/api/auth/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: 'include',
+    body: JSON.stringify({
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword,
+    }),
+  });
 
-        const data = await res.json();
-        
-        if (!res.ok) {
-          console.error('Signup error response:', data); // Debug log
-          setError(data.message || data.error || "Signup failed. Please try again.");
-          setLoading(false);
-          return;
-        }
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : {}; // 🔐 safe parsing
 
-        // Store token in localStorage
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
-        
-        navigate("/login", { 
-          state: { 
-            message: "Account created successfully! Please login to continue." 
-          }
-        });
-      } catch (error) {
-        setError(error.message || "Network error. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    } finally {
-      setLoading(false);
+  if (!res.ok) {
+    console.error('Signup error response:', data);
+    setError(data.message || data.error || "Signup failed. Please try again.");
+    setLoading(false);
+    return;
+  }
+
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('userId', data.userId);
+
+  navigate("/login", {
+    state: {
+      message: "Account created successfully! Please login to continue."
     }
+  });
+} catch (error) {
+  setError(error.message || "Network error. Please try again.");
+} finally {
+  setLoading(false);
+}
+
   };
 
   return (
