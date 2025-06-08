@@ -53,7 +53,7 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://rental-back-gvg5.onrender.com/api/auth/signup", {
+      const response = await fetch("https://rental-back-k1cn.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
