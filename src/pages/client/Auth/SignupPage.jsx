@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 
 // Fallback to localhost if env is missing
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const SignupPage = () => {
   const navigate = useNavigate();
 
@@ -31,7 +32,6 @@ const SignupPage = () => {
     e.preventDefault();
     setError("");
 
-    // Basic validations
     const { username, email, password, confirmPassword } = formData;
 
     if (!username || !email || !password || !confirmPassword) {
@@ -53,12 +53,12 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-  const response = await fetch("https://rental-back-gvg5.onrender.com/api/auth/signup", {
+      const response = await fetch(`${baseURL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        credentials: "include", // Include cookies if needed
         body: JSON.stringify({ username, email, password }),
       });
 
@@ -72,11 +72,10 @@ const SignupPage = () => {
 
       if (!response.ok) {
         setError(data.message || data.error || "Signup failed. Please try again.");
-        setLoading(false);
         return;
       }
 
-      // Save token/user info if returned
+      // Save user data if returned
       if (data.token && data.userId) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
@@ -89,7 +88,7 @@ const SignupPage = () => {
       });
     } catch (err) {
       console.error("Signup Error:", err);
-      setError(err.message || "Network error. Please try again.");
+      setError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
