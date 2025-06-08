@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 
 // Fallback to localhost if env is missing
-const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const baseURL = "https://rental-back-gvg5.onrender.com";
 
 const SignupPage = () => {
   const navigate = useNavigate();
